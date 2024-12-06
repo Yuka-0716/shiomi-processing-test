@@ -1,26 +1,39 @@
 /**
- * Simple Particle System
- * by Daniel Shiffman.  
+ * Simple Particle System with Cursor-following Icon
+ * by Daniel Shiffman.
  * 
  * Particles are generated each cycle through draw(),
  * fall with gravity, and fade out over time.
- * A ParticleSystem object manages a variable size (ArrayList) 
+ * A ParticleSystem object manages a variable size (ArrayList)
  * list of particles. 
  */
 
 ParticleSystem ps;
-PImage bgImage; // 背景画像を格納する変数
+PImage bgImage;   // 背景画像を格納する変数
+PImage iconImage; // アイコン画像を格納する変数
 
 void setup() {
   size(640, 360);
   ps = new ParticleSystem(new PVector(width/2, 50));
-  // 画像を読み込む
   bgImage = loadImage("C:\\Users\\bb40120052\\Desktop\\夜の街.jpeg");
+  iconImage = loadImage("C:\\Users\\bb40120052\\Desktop\\サンタ.png");
 }
 
 void draw() {
   // 背景画像を表示
   image(bgImage, 0, 0, width, height);
+  
+  // パーティクルシステムの更新
   ps.addParticle();
   ps.run();
+  
+  // マウスに追従するアイコンを表示
+  displayIcon(mouseX, mouseY);
+}
+
+// マウスに追従するアイコンを描画する関数
+void displayIcon(float x, float y) {
+  float iconWidth = 100;  // アイコンの幅
+  float iconHeight = 60; // アイコンの高さ
+  image(iconImage, x - iconWidth / 2, y - iconHeight / 2, iconWidth, iconHeight);
 }
