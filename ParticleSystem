@@ -11,7 +11,12 @@ class ParticleSystem {
   }
 
   void addParticle() {
-    particles.add(new Particle(origin));
+    // 発射位置のX座標をランダムに設定
+    float randomX = random(width);
+    // 発射位置のY座標を画面外の上（-50 から 0 の間）に設定
+    float randomY = random(-50, 0);
+    PVector randomOrigin = new PVector(randomX, randomY);
+    particles.add(new Particle(randomOrigin));
   }
 
   void run() {
